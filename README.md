@@ -55,6 +55,9 @@ If motors consume high current, use a heat sink with the L298 motor driver.
 The circuit must be like this,(it depends upon the user what pins he takes:),
 ![LFR using 5 ir sensor sketch](https://github.com/user-attachments/assets/16ffd835-c851-4a2b-9569-fbb1e422c64c)
 
+Now you can customize your bot for any track by making algorithm like me and simply modifying the code.<br>
+That's really smart and cool...
+
 
 
 
