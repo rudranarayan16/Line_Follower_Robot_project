@@ -7,5 +7,6 @@ This project demonstrates a line follower robot equipped with five IR sensors fo
    -Comprehensive documentation on hardware setup, software implementation in Arduino IDE.
 
 This project serves as an excellent reference for robotics enthusiasts and beginners exploring sensor-based feedback control systems.
+The numbers in the track are for evaluation purposes, so just ignore them...
 
    
