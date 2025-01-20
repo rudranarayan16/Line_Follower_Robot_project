@@ -52,8 +52,10 @@ Power the Arduino Nano either through the USB port or by connecting the VIN pin 
 Ensure you have a common ground connection between all components (Arduino, L298, and sensors).
 If motors consume high current, use a heat sink with the L298 motor driver.
 
-The circuit must be like this,(in this picture, 2 IR sensors are there, make it 5 simply by series connection. Don't consider the connection in this picture, it is for reference.)
-![Sample Circuit Diagram](https://github.com/user-attachments/assets/6e11a11a-8b75-4509-b345-c37cbd881826)
+The circuit must be like this,(it depends upon the user what pins he takes:),
+![LFR using 5 ir sensor sketch](https://github.com/user-attachments/assets/16ffd835-c851-4a2b-9569-fbb1e422c64c)
+
+
 
 
 
