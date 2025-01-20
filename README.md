@@ -9,7 +9,7 @@ This project demonstrates a line follower robot equipped with five IR sensors fo
 This project serves as an excellent reference for robotics enthusiasts and beginners exploring sensor-based feedback control systems.
 The numbers in the track are for evaluation purposes, so just ignore them...
 
-Here is the connection details,
+Here is the connection details,<br>
 IR Sensors Connections,
 The code defines the following pins for IR sensors:
 IR_SENSOR_RIGHTMOST: Pin 12
