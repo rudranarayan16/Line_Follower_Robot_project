@@ -1,0 +1,186 @@
+#define IR_SENSOR_RIGHT 11
+#define IR_SENSOR_LEFT 3
+#define IR_SENSOR_MID 4
+#define IR_SENSOR_RIGHTMOST 12
+#define IR_SENSOR_LEFTMOST 2
+
+#define MOTOR_SPEED 180
+
+//Right motor
+int enableRightMotor=6;
+int rightMotorPin1=10;
+int rightMotorPin2=8;
+
+//Left motor
+int enableLeftMotor=5;
+int leftMotorPin1=9;
+int leftMotorPin2=7;
+
+void setup()
+{
+  // TT gear motors don't rotate at very low PWM values, making precise control difficult.  
+  // Increasing the PWM value causes the motors to spin too fast, leading to instability and line deviation.  
+  // To resolve this, we increase the PWM frequency on pins D5 and D6 to 7812.5 Hz.  
+  // This allows the motors to run smoothly at controlled lower speeds even with higher PWM values.  
+
+  TCCR0B = TCCR0B & B11111000 | B00000010 ;
+  
+  // put your setup code here, to run once:
+  pinMode(enableRightMotor, OUTPUT);
+  pinMode(rightMotorPin1, OUTPUT);
+  pinMode(rightMotorPin2, OUTPUT);
+  
+  pinMode(enableLeftMotor, OUTPUT);
+  pinMode(leftMotorPin1, OUTPUT);
+  pinMode(leftMotorPin2, OUTPUT);
+
+  pinMode(IR_SENSOR_RIGHT, INPUT);
+  pinMode(IR_SENSOR_LEFT, INPUT);
+  pinMode(IR_SENSOR_MID, INPUT);
+  pinMode(IR_SENSOR_RIGHTMOST,INPUT);
+  pinMode(IR_SENSOR_LEFTMOST,INPUT);
+  rotateMotor(0,0);   
+}
+
+
+void loop()
+{
+
+  int rightIRSensorValue = digitalRead(IR_SENSOR_RIGHT);
+  int leftIRSensorValue = digitalRead(IR_SENSOR_LEFT);
+  int midIRSensorValue = digitalRead(IR_SENSOR_MID);
+  int rightmostIRSensorValue = digitalRead(IR_SENSOR_RIGHTMOST);
+  int leftmostIRSensorValue = digitalRead(IR_SENSOR_LEFTMOST);
+
+  //logic is written in paper by rudra so see that
+  if (leftmostIRSensorValue == HIGH && leftIRSensorValue == HIGH && midIRSensorValue == LOW && rightIRSensorValue == HIGH     && rightmostIRSensorValue == HIGH)
+  {
+    rotateMotor(MOTOR_SPEED,MOTOR_SPEED);                     //11011 straight
+  }
+
+  else if (leftmostIRSensorValue == HIGH && leftIRSensorValue == LOW && midIRSensorValue == HIGH && rightIRSensorValue == HIGH && rightmostIRSensorValue == HIGH)
+  {
+    rotateMotor(MOTOR_SPEED,-MOTOR_SPEED);                     //10111 left
+  }
+  else if (leftmostIRSensorValue == HIGH && leftIRSensorValue == HIGH && midIRSensorValue == HIGH && rightIRSensorValue == LOW && rightmostIRSensorValue == HIGH)
+  {
+     rotateMotor(-MOTOR_SPEED,MOTOR_SPEED);                   //11101 right
+     
+  }
+  else if (leftmostIRSensorValue == LOW && leftIRSensorValue == HIGH && midIRSensorValue == HIGH && rightIRSensorValue == HIGH && rightmostIRSensorValue == LOW )
+  {
+     rotateMotor(MOTOR_SPEED,MOTOR_SPEED);                   //01110 straight
+  }
+  else if (leftmostIRSensorValue == HIGH    && leftIRSensorValue == HIGH   && midIRSensorValue == LOW && rightIRSensorValue == LOW && rightmostIRSensorValue == LOW)
+  {
+     rotateMotor(MOTOR_SPEED,-MOTOR_SPEED);                   //11000 left
+  }
+  else if (leftmostIRSensorValue == HIGH && leftIRSensorValue == HIGH && midIRSensorValue == HIGH && rightIRSensorValue == LOW && rightmostIRSensorValue == LOW)
+  {
+     rotateMotor(MOTOR_SPEED,-MOTOR_SPEED);                    //11100 left
+  }
+  else if (leftmostIRSensorValue == LOW && leftIRSensorValue == LOW && midIRSensorValue == HIGH && rightIRSensorValue == HIGH && rightmostIRSensorValue == HIGH)
+  {
+     rotateMotor(-MOTOR_SPEED,MOTOR_SPEED);                   //00111 right
+  }
+  else if (leftmostIRSensorValue == HIGH && leftIRSensorValue == HIGH && midIRSensorValue == HIGH && rightIRSensorValue == HIGH && rightmostIRSensorValue == LOW)
+  {
+     rotateMotor(MOTOR_SPEED,-MOTOR_SPEED);                   //11110 left
+  }
+  else if (leftmostIRSensorValue == LOW && leftIRSensorValue == LOW && midIRSensorValue == LOW && rightIRSensorValue == LOW && rightmostIRSensorValue == HIGH)
+  {
+    rotateMotor(-MOTOR_SPEED,MOTOR_SPEED);                     //00001 right
+  }
+  else if (leftmostIRSensorValue == LOW && leftIRSensorValue == LOW && midIRSensorValue == LOW && rightIRSensorValue == HIGH && rightmostIRSensorValue == HIGH)
+  {
+    rotateMotor(-MOTOR_SPEED,MOTOR_SPEED);                     //00011 right
+  }
+  else if (leftmostIRSensorValue == LOW && leftIRSensorValue == HIGH && midIRSensorValue == HIGH && rightIRSensorValue == HIGH && rightmostIRSensorValue == HIGH)
+  {
+    rotateMotor(-MOTOR_SPEED,MOTOR_SPEED);                     //01111 right
+  }
+  else if (leftmostIRSensorValue == HIGH && leftIRSensorValue == LOW && midIRSensorValue == LOW && rightIRSensorValue == LOW && rightmostIRSensorValue == LOW)
+  {
+    rotateMotor(MOTOR_SPEED,MOTOR_SPEED);                     //10000 straight
+  }
+  else if (leftmostIRSensorValue == HIGH && leftIRSensorValue == HIGH && midIRSensorValue == HIGH && rightIRSensorValue == HIGH && rightmostIRSensorValue == HIGH)
+  {
+    rotateMotor(-MOTOR_SPEED,MOTOR_SPEED);                     //11111 right
+  }
+  else if (leftmostIRSensorValue == LOW && leftIRSensorValue == HIGH && midIRSensorValue == LOW && rightIRSensorValue == LOW && rightmostIRSensorValue == LOW)
+  {
+    rotateMotor(MOTOR_SPEED,-MOTOR_SPEED);                     //01000 left
+  }  
+  else if (leftmostIRSensorValue == LOW && leftIRSensorValue == LOW && midIRSensorValue == LOW && rightIRSensorValue == HIGH && rightmostIRSensorValue == LOW)
+  {
+    rotateMotor(-MOTOR_SPEED,MOTOR_SPEED);                     //00010 right
+  }
+  else if (leftmostIRSensorValue == LOW && leftIRSensorValue == LOW && midIRSensorValue == LOW && rightIRSensorValue == LOW && rightmostIRSensorValue == LOW)
+  {
+    rotateMotor(MOTOR_SPEED,MOTOR_SPEED);                     //00000 straight
+  }
+  else if (leftmostIRSensorValue == LOW && leftIRSensorValue == LOW && midIRSensorValue == HIGH && rightIRSensorValue == LOW && rightmostIRSensorValue == LOW)
+  {
+    rotateMotor(MOTOR_SPEED,MOTOR_SPEED);                     //00100 straight
+  }
+  else if (leftmostIRSensorValue == LOW && leftIRSensorValue == HIGH && midIRSensorValue == LOW && rightIRSensorValue == HIGH && rightmostIRSensorValue == LOW)
+  {
+    rotateMotor(MOTOR_SPEED,-MOTOR_SPEED);                     //01010 left
+  }
+  else if (leftmostIRSensorValue == LOW && leftIRSensorValue == HIGH && midIRSensorValue == LOW && rightIRSensorValue == LOW && rightmostIRSensorValue == HIGH)
+  {
+    rotateMotor(MOTOR_SPEED,-MOTOR_SPEED);                     //01001 left
+  }
+  else if (leftmostIRSensorValue == LOW && leftIRSensorValue == HIGH && midIRSensorValue == LOW && rightIRSensorValue == LOW && rightmostIRSensorValue == LOW)
+  {
+    rotateMotor(MOTOR_SPEED,-MOTOR_SPEED);                     //01000 left
+  }
+  else if (leftmostIRSensorValue == LOW && leftIRSensorValue == HIGH && midIRSensorValue == HIGH && rightIRSensorValue == LOW && rightmostIRSensorValue == LOW)
+  {
+    rotateMotor(-MOTOR_SPEED,MOTOR_SPEED);                     //01100 right
+  }
+  else if (leftmostIRSensorValue == LOW && leftIRSensorValue == HIGH && midIRSensorValue == HIGH && rightIRSensorValue == LOW && rightmostIRSensorValue == HIGH)
+  {
+    rotateMotor(MOTOR_SPEED,-MOTOR_SPEED);                     //01101 left
+  }
+  
+} 
+  
+
+void rotateMotor(int rightMotorSpeed, int leftMotorSpeed)
+{
+  
+  if (rightMotorSpeed < 0)
+  {
+    digitalWrite(rightMotorPin1,LOW);
+    digitalWrite(rightMotorPin2,HIGH);    
+  }
+  else if (rightMotorSpeed > 0)
+  {
+    digitalWrite(rightMotorPin1,HIGH);
+    digitalWrite(rightMotorPin2,LOW);      
+  }
+  else
+  {
+    digitalWrite(rightMotorPin1,LOW);
+    digitalWrite(rightMotorPin2,LOW);      
+  }
+
+  if (leftMotorSpeed < 0)
+  {
+    digitalWrite(leftMotorPin1,LOW);
+    digitalWrite(leftMotorPin2,HIGH);    
+  }
+  else if (leftMotorSpeed > 0)
+  {
+    digitalWrite(leftMotorPin1,HIGH);
+    digitalWrite(leftMotorPin2,LOW);      
+  }
+  else 
+  {
+    digitalWrite(leftMotorPin1,LOW);
+    digitalWrite(leftMotorPin2,LOW);      
+  }
+  analogWrite(enableRightMotor, abs(rightMotorSpeed));
+  analogWrite(enableLeftMotor, abs(leftMotorSpeed));    
+}
