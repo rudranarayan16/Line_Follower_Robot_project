@@ -53,6 +53,7 @@ void loop()
   int leftmostIRSensorValue = digitalRead(IR_SENSOR_LEFTMOST);
 
   //logic is written in paper by rudra so see that
+  //function is rotateMotor(x,y), where x is positive and y is negative, it implements the left rotation of the robot and opposite for the right rotation of the bot.
   if (leftmostIRSensorValue == HIGH && leftIRSensorValue == HIGH && midIRSensorValue == LOW && rightIRSensorValue == HIGH     && rightmostIRSensorValue == HIGH)
   {
     rotateMotor(MOTOR_SPEED,MOTOR_SPEED);                     //11011 straight
