@@ -23,7 +23,6 @@ Connect the OUT pin of each IR sensor to the respective Arduino pin as defined a
 Connect the VCC pin of the IR sensors to 5V on the Arduino Nano.
 Connect the GND pin of the IR sensors to the GND on the Arduino Nano.
 
-L298 Motor Driver Connections,
 Right Motor Pins:
 Enable Pin: Pin 6 (PWM)
 Input Pins:
@@ -35,7 +34,6 @@ Input Pins:
 Pin 9 → IN3 (Left motor forward)
 Pin 7 → IN4 (Left motor backward)
 
-Wiring:
 Connect the Enable pins (ENA and ENB) of the L298 to pins 6 and 5 respectively on the Arduino.
 Connect the IN1, IN2, IN3, and IN4 pins of the L298 to pins 10, 8, 9, and 7 respectively on the Arduino.
 Connect the motor terminals to the motor output pins of the L298:
@@ -45,11 +43,9 @@ Connect the VCC pin of the L298 to an external power source (typically 12V or ac
 Connect the GND pin of the L298 to the common ground (shared with Arduino).
 Connect the 5V output pin of the L298 to the 5V pin on the Arduino Nano.
 
-Power Supply,
 A battery pack (e.g., 6V or 12V) is used to power the motors through the L298 motor driver's VCC pin.
 Ensure the ground of the battery is connected to the common ground shared by the Arduino Nano and L298.
 
-Arduino Nano Pins
 Connect the Arduino Nano USB port to your PC for programming.
 Power the Arduino Nano either through the USB port or by connecting the VIN pin to the L298 motor driver's 5V output.
 
