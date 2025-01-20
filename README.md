@@ -53,7 +53,9 @@ Ensure you have a common ground connection between all components (Arduino, L298
 If motors consume high current, use a heat sink with the L298 motor driver.
 
 The circuit must be like this,(it depends upon the user what pins he takes:),
-![LFR using 5 ir sensor sketch](https://github.com/user-attachments/assets/16ffd835-c851-4a2b-9569-fbb1e422c64c)
+![LFR using 5 ir sensor sketch](https://github.com/user-attachments/assets/c827eef0-79cd-49d0-b145-189b9cf41bc2)
+
+
 
 Now you can customize your bot for any track by making algorithm like me and simply modifying the code.<br>
 That's really smart and cool...
